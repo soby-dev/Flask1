@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<form method="POST" enctype="multipart/form-data" action="{{url_for('login')}}" autocomplete="off">
+		{{ form.csrf_token }}
+		{{ form.hidden_tag() }}
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4">Create Post</legend>
+			<div class="mb-3">
+				{{ form.title.label(class="form-label") }}
+				{{ form.title(class="form-control") }}
+
+				{% if form.title.errors %}
+					{% for error in form.title.errors %}
+						<p class="text-danger">{{ error }}</p>
+					{% endfor %}
+				{% endif %}
+			</div>
+
+			<div class="mb-3" id="content" style="display:none">
+				{{ form.content(class="form-control") }}
+
+				{% if form.content.errors %}
+					{% for error in form.content.errors %}
+						<p class="text-danger">{{ error }}</p>
+					{% endfor %}
+				{% endif %}
+			</div>
+
+			<div class="mb-3" id="image" style="display:none">
+				{{ form.image(class="form-control") }}
+
+				{% if form.image.errors %}
+					{% for error in form.image.errors %}
+						<p class="text-danger">{{ error }}</p>
+					{% endfor %}
+				{% endif %}
+			</div>
+
+			<div class="mb-3" id="video" style="display:none">
+
+				{{ form.video(class="form-control") }}
+
+				{% if form.video.errors %}
+					{% for error in form.video.errors %}
+						<p class="text-danger">{{ error }}</p>
+					{% endfor %}
+				{% endif %}
+			</div>
+
+			<div id="content-add">
+				<button type="button" class="btn add-element btn-primary" id="add-content">Add text content</button>
+				<button type="button" class="btn add-element btn-secondary" id="add-image">Add image</button>
+				<button type="button" class="btn add-element btn-success" id="add-video">Add Video</button>
+			</div>
+
+			<div class="mb-3 mt-4">
+				{{ form.submit(class="btn btn-primary") }}
+			</div>
+		</fieldset>
+	</form>
+	<script type="text/javascript" src="static/dropdown.js"></script>
+{% endblock %}
